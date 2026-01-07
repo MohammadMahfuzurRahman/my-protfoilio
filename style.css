@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.all-font {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+
+}
+header{
+    background-color: antiquewhite;
+    background: url("hero-dev-portfolio-resources/images/developer.png"),
+    url("hero-dev-portfolio-resources/images/header_bg.png"),#fff8F3;
+   background-position: top left ,bottom right;
+    background-repeat: no-repeat;
+
+    border: 1000px;
+  
+} 
+.logo h2
+{
+    font size: 45px;
+    font width: 900;
+
+}
+.r{
+    color: rgb(219, 92, 7);
+}
+nav{
+    width: 1140px;
+    margin:0 auto ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav .menu{
+    display: flex;
+    list-style: none;
+    gap: 51px;
+    align-items:center;
+}
+nav .menu a
+{
+  font size: 20px;
+  font color: red;
+}
+.btn{
+    color: azure;
+    background-color: rgb(219, 92, 7);
+    border: none;
+    padding: 18px 35px;
+    border-radius: 5px;
+    font size: 20px;
+    font weight: bold;
+    cursor: pointer;
+    
+}
+#banner{
+    margin: 47px 38px 0 230px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#banner .banner-content h2{
+    font-size: 45px;
+    font-weight: 600;
+    color: #474747;
+    margin-bottom: 5px;
+
+}
+#banner .banner-content h1{
+    font-size: 85px;
+    font-weight: bold;
+    color: #181818;
+    margin-bottom: 20px;
+}
+#banner .banner-image img{
+    max-width: 585px;
+    vertical-align: middle;
+}

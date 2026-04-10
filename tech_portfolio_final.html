@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
     <title>Md. Mahfuzur Rahman - Tech Developer</title>
     <style>
         * {
@@ -46,11 +47,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                /* Horizontal lines */
                 linear-gradient(90deg, transparent 24%, rgba(0, 217, 255, 0.03) 25%, rgba(0, 217, 255, 0.03) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.03) 75%, rgba(0, 217, 255, 0.03) 76%, transparent 77%, transparent),
-                /* Vertical lines */
                 linear-gradient(0deg, transparent 24%, rgba(0, 255, 136, 0.03) 25%, rgba(0, 255, 136, 0.03) 26%, transparent 27%, transparent 74%, rgba(0, 255, 136, 0.03) 75%, rgba(0, 255, 136, 0.03) 76%, transparent 77%, transparent),
-                /* Diagonal lines for circuit effect */
                 linear-gradient(45deg, transparent 48%, rgba(0, 217, 255, 0.02) 49%, rgba(0, 217, 255, 0.02) 51%, transparent 52%),
                 linear-gradient(-45deg, transparent 48%, rgba(0, 255, 136, 0.02) 49%, rgba(0, 255, 136, 0.02) 51%, transparent 52%);
             background-size: 100px 100px, 100px 100px, 200px 200px, 200px 200px;
@@ -77,14 +75,12 @@
             width: 100%;
             height: 100%;
             background: 
-                /* Multiple glowing spots - circuit nodes */
                 radial-gradient(circle 100px at 10% 20%, rgba(0, 255, 136, 0.15) 0%, transparent 100%),
                 radial-gradient(circle 120px at 80% 80%, rgba(0, 217, 255, 0.12) 0%, transparent 100%),
                 radial-gradient(circle 90px at 50% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 100%),
                 radial-gradient(circle 110px at 25% 75%, rgba(0, 255, 136, 0.1) 0%, transparent 100%),
                 radial-gradient(circle 100px at 75% 25%, rgba(0, 217, 255, 0.1) 0%, transparent 100%),
                 radial-gradient(circle 80px at 90% 50%, rgba(255, 100, 200, 0.06) 0%, transparent 100%),
-                /* Overall dark overlay */
                 linear-gradient(180deg, rgba(10, 14, 39, 0.6) 0%, rgba(10, 14, 39, 0.4) 50%, rgba(10, 14, 39, 0.6) 100%);
             pointer-events: none;
             z-index: 1;
@@ -99,7 +95,6 @@
                 filter: brightness(1.1);
             }
         }
-
 
         body > * {
             position: relative;
@@ -264,16 +259,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: glow 3s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% {
-                text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-            }
-            50% {
-                text-shadow: 0 0 40px rgba(0, 255, 136, 0.6);
-            }
         }
 
         .hero h2 {
@@ -389,6 +374,15 @@
             color: var(--primary-neon);
             margin-right: 0.5rem;
         }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+        }
+
         .section-header {
             margin-bottom: 4rem;
         }
@@ -481,10 +475,233 @@
             border-radius: 8px;
         }
 
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 217, 255, 0.05));
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-neon), var(--secondary-neon));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            border-color: var(--primary-neon);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1));
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 255, 136, 0.15);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .project-header h3 {
+            color: var(--primary-neon);
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .project-tag {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--primary-neon);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech span {
+            background: rgba(0, 217, 255, 0.15);
+            color: var(--secondary-neon);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 217, 255, 0.3);
+        }
+
+        .project-links {
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+        }
+
+        .project-link {
+            color: var(--primary-neon);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .project-link:hover {
+            color: var(--secondary-neon);
+            transform: translateX(5px);
+        }
+
+        /* Experience Timeline */
+        .experience-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-neon), transparent);
+        }
+
+        .experience-item {
+            margin-bottom: 3rem;
+            width: 45%;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 217, 255, 0.05));
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 12px;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .experience-item:nth-child(odd) {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .experience-item:nth-child(even) {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-neon);
+            border-radius: 50%;
+            top: 2rem;
+            border: 3px solid var(--bg-dark);
+            box-shadow: 0 0 0 2px var(--primary-neon);
+        }
+
+        .experience-item:nth-child(odd)::before {
+            right: -34px;
+        }
+
+        .experience-item:nth-child(even)::before {
+            left: -34px;
+        }
+
+        .experience-item:hover {
+            border-color: var(--primary-neon);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1));
+            box-shadow: 0 20px 50px rgba(0, 255, 136, 0.15);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-header h3 {
+            color: var(--primary-neon);
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .company {
+            color: var(--secondary-neon);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .exp-duration {
+            color: var(--accent-pink);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .exp-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .exp-list li {
+            color: var(--text-muted);
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .exp-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-neon);
+            font-weight: 700;
+        }
+
         /* Education Timeline */
         .timeline {
             position: relative;
-            padding: 2rem 0;
         }
 
         .timeline::before {
@@ -527,16 +744,6 @@
             border: 3px solid var(--primary-neon);
             border-radius: 50%;
             top: 2rem;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
-            }
-            50% {
-                box-shadow: 0 0 0 10px rgba(0, 255, 136, 0);
-            }
         }
 
         .timeline-item:nth-child(odd)::before {
@@ -739,18 +946,27 @@
                 padding: 6rem 1rem 2rem;
             }
 
-            .timeline::before {
+            .timeline::before,
+            .experience-timeline::before {
                 left: 20px;
             }
 
-            .timeline-item {
+            .timeline-item,
+            .experience-item {
                 width: calc(100% - 60px);
                 margin-left: 60px !important;
                 margin-right: 0 !important;
             }
 
-            .timeline-item::before {
+            .timeline-item::before,
+            .experience-item::before {
                 left: -40px !important;
+                right: auto !important;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             section {
@@ -769,6 +985,10 @@
             .skills-grid {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
                 gap: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
 
             .about-grid {
@@ -798,44 +1018,12 @@
             .hero h2 {
                 font-size: 1rem;
             }
-        }
 
-        /* Code block styling */
-        .code-snippet {
-            background: var(--code-bg);
-            border: 1px solid rgba(0, 255, 136, 0.2);
-            padding: 1.5rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 2rem 0;
-            font-size: 0.95rem;
-        }
-
-        .code-snippet code {
-            color: var(--primary-neon);
-            line-height: 1.6;
-        }
-
-        /* Loading animation */
-        @keyframes scanning {
-            0% {
-                opacity: 0;
+            .experience-header,
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
             }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
-
-        .scanner {
-            display: inline-block;
-            width: 2px;
-            height: 20px;
-            background: var(--primary-neon);
-            animation: scanning 1s infinite;
-            margin-left: 5px;
         }
     </style>
 </head>
@@ -843,10 +1031,12 @@
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <div class="logo">MR<span class="scanner"></span></div>
+            <div class="logo">MR<span style="display: inline-block; width: 2px; height: 20px; background: var(--primary-neon); animation: scanning 1s infinite; margin-left: 5px;"></span></div>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -862,6 +1052,7 @@
             <p>
                 Building modern web experiences with cutting-edge technologies.
                 Passionate about clean code, innovative design, and solving complex problems.
+                Currently pursuing BSc in Computer Science & Engineering at IUBAT.
             </p>
             <div class="cta-buttons">
                 <button class="btn" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
@@ -877,19 +1068,21 @@
     <!-- About Section -->
     <section id="about" class="container">
         <div class="section-header">
+            <span class="section-subtitle">// who i am</span>
             <h2 class="section-title scroll-reveal">About Me</h2>
         </div>
 
         <div class="about-text scroll-reveal">
-            I'm a passionate developer and tech enthusiast from Bangladesh with expertise in building full-stack web applications. 
-            My journey in tech has been driven by a love for clean code, innovative solutions, and continuous learning. 
-            When I'm not coding, I'm exploring new technologies and contributing to the developer community.
+            I'm Md. Mahfuzur Rahman, a passionate developer and tech enthusiast from Dhaka, Bangladesh. 
+            Currently pursuing my Bachelor's degree in Computer Science & Engineering at IUBAT. 
+            I have a strong passion for building full-stack web applications with modern technologies. 
+            My journey in tech has been driven by a love for clean code, innovative solutions, and continuous learning.
         </div>
 
         <div class="about-grid">
             <div class="info-box scroll-reveal">
                 <div class="label">📅 Date of Birth</div>
-                <div class="value">November 18, 2005</div>
+                <div class="value">18 November 2005</div>
             </div>
             <div class="info-box scroll-reveal">
                 <div class="label">📞 Phone</div>
@@ -905,11 +1098,196 @@
             </div>
             <div class="info-box scroll-reveal">
                 <div class="label">💼 Profession</div>
-                <div class="value">Tech Developer</div>
+                <div class="value">Tech Developer & Student</div>
             </div>
             <div class="info-box scroll-reveal">
                 <div class="label">🎓 Education</div>
-                <div class="value">BSc in CSE</div>
+                <div class="value">BSc in CSE (IUBAT)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="container">
+        <div class="section-header">
+            <span class="section-subtitle">// featured work</span>
+            <h2 class="section-title scroll-reveal">Featured Projects</h2>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card scroll-reveal">
+                <div class="project-header">
+                    <h3>Responsive Portfolio Website</h3>
+                    <span class="project-tag">Frontend</span>
+                </div>
+                <p class="project-desc">
+                    Modern, fully responsive portfolio website with smooth animations, circuit board background effects, 
+                    and glassmorphism design. Showcasing projects, skills, and experience with advanced CSS animations.
+                </p>
+                <div class="project-tech">
+                    <span>HTML5</span>
+                    <span>CSS3</span>
+                    <span>JavaScript</span>
+                    <span>Animations</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://mohammadmahfuzurrahman.github.io/my-protfoilio/" target="_blank" rel="noopener noreferrer" class="project-link">View Project →</a>
+                </div>
+            </div>
+
+            <div class="project-card scroll-reveal">
+                <div class="project-header">
+                    <h3>Web Development Projects</h3>
+                    <span class="project-tag">Full Stack</span>
+                </div>
+                <p class="project-desc">
+                    Collection of academic projects including dynamic web applications, interactive UI components, 
+                    and full-stack implementations with proper database integration and API development.
+                </p>
+                <div class="project-tech">
+                    <span>React.js</span>
+                    <span>Node.js</span>
+                    <span>MongoDB</span>
+                    <span>Express</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/mohammadmahfuzurrahman" target="_blank" rel="noopener noreferrer" class="project-link">View Projects →</a>
+                </div>
+            </div>
+
+            <div class="project-card scroll-reveal">
+                <div class="project-header">
+                    <h3>UI/UX Design Projects</h3>
+                    <span class="project-tag">Design</span>
+                </div>
+                <p class="project-desc">
+                    Modern user interface designs with focus on user experience, accessibility, and modern design principles. 
+                    Created using Figma and Adobe XD with responsive design considerations.
+                </p>
+                <div class="project-tech">
+                    <span>Figma</span>
+                    <span>Adobe XD</span>
+                    <span>UI Design</span>
+                    <span>Responsive Design</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">View Designs →</a>
+                </div>
+            </div>
+
+            <div class="project-card scroll-reveal">
+                <div class="project-header">
+                    <h3>JavaScript Projects</h3>
+                    <span class="project-tag">Frontend</span>
+                </div>
+                <p class="project-desc">
+                    Interactive JavaScript projects including DOM manipulation, event handling, API integration, 
+                    and dynamic content generation. Demonstrates strong JavaScript fundamentals and problem-solving skills.
+                </p>
+                <div class="project-tech">
+                    <span>JavaScript ES6+</span>
+                    <span>DOM APIs</span>
+                    <span>Fetch API</span>
+                    <span>HTML5</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">View Projects →</a>
+                </div>
+            </div>
+
+            <div class="project-card scroll-reveal">
+                <div class="project-header">
+                    <h3>CSS & Animation Showcase</h3>
+                    <span class="project-tag">Frontend</span>
+                </div>
+                <p class="project-desc">
+                    Advanced CSS projects showcasing animations, transitions, and visual effects. 
+                    Demonstrates expertise in creating smooth, performance-optimized animations and responsive layouts.
+                </p>
+                <div class="project-tech">
+                    <span>CSS3 Animations</span>
+                    <span>CSS Grid</span>
+                    <span>Flexbox</span>
+                    <span>Transitions</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">View Showcase →</a>
+                </div>
+            </div>
+
+            <div class="project-card scroll-reveal">
+                <div class="project-header">
+                    <h3>Academic Coursework</h3>
+                    <span class="project-tag">Full Stack</span>
+                </div>
+                <p class="project-desc">
+                    Collection of academic projects from BSc in CSE program at IUBAT. 
+                    Includes algorithms, data structures, database design, and software engineering concepts.
+                </p>
+                <div class="project-tech">
+                    <span>Python</span>
+                    <span>SQL</span>
+                    <span>Data Structures</span>
+                    <span>Algorithms</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">View Coursework →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="container">
+        <div class="section-header">
+            <span class="section-subtitle">// career journey</span>
+            <h2 class="section-title scroll-reveal">Experience</h2>
+        </div>
+
+        <div class="experience-timeline">
+            <div class="experience-item scroll-reveal">
+                <div class="experience-header">
+                    <h3>Web Development Enthusiast</h3>
+                    <span class="company">Self-Driven Learning</span>
+                </div>
+                <p class="exp-duration">2023 - Present</p>
+                <ul class="exp-list">
+                    <li>Mastered front-end technologies: HTML5, CSS3, JavaScript ES6+</li>
+                    <li>Built multiple responsive and interactive web applications</li>
+                    <li>Learned modern frameworks: React.js, Node.js, Express.js</li>
+                    <li>Practiced database design and MongoDB integration</li>
+                    <li>Contributed to open-source projects and GitHub</li>
+                </ul>
+            </div>
+
+            <div class="experience-item scroll-reveal">
+                <div class="experience-header">
+                    <h3>BSc in Computer Science & Engineering</h3>
+                    <span class="company">IUBAT</span>
+                </div>
+                <p class="exp-duration">2021 - Present</p>
+                <ul class="exp-list">
+                    <li>Strong foundation in computer science fundamentals</li>
+                    <li>Completed courses in Data Structures, Algorithms, and Database Management</li>
+                    <li>Practical experience with programming languages: Python, Java, C++</li>
+                    <li>Developed multiple projects demonstrating coding expertise</li>
+                    <li>Active participation in tech clubs and development competitions</li>
+                </ul>
+            </div>
+
+            <div class="experience-item scroll-reveal">
+                <div class="experience-header">
+                    <h3>Student & Developer</h3>
+                    <span class="company">Personal Projects</span>
+                </div>
+                <p class="exp-duration">2020 - Present</p>
+                <ul class="exp-list">
+                    <li>Created multiple full-stack web applications and projects</li>
+                    <li>Demonstrated proficiency in modern web development tools and technologies</li>
+                    <li>Built responsive, user-friendly interfaces with focus on UX/UI</li>
+                    <li>Developed back-end services and REST APIs</li>
+                    <li>Continuously learning new technologies and frameworks</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -917,6 +1295,7 @@
     <!-- Education Section -->
     <section id="education" class="container">
         <div class="section-header">
+            <span class="section-subtitle">// academic journey</span>
             <h2 class="section-title scroll-reveal">Education</h2>
         </div>
 
@@ -924,13 +1303,13 @@
             <div class="timeline-item scroll-reveal">
                 <h3>Bachelor of Science in Computer Science & Engineering</h3>
                 <p><strong>IUBAT - International University of Business Agriculture and Technology</strong></p>
-                <p class="year">Currently Pursuing</p>
+                <p class="year">2021 - Present (Ongoing)</p>
             </div>
 
             <div class="timeline-item scroll-reveal">
                 <h3>Higher Secondary Certificate (HSC)</h3>
                 <p><strong>Nawab Habibullah Model School and College</strong></p>
-                <p class="year">GPA: 5.0</p>
+                <p class="year">Completed</p>
             </div>
 
             <div class="timeline-item scroll-reveal">
@@ -944,6 +1323,7 @@
     <!-- Skills Section -->
     <section id="skills" class="container">
         <div class="section-header">
+            <span class="section-subtitle">// technical skills</span>
             <h2 class="section-title scroll-reveal">Skills & Technologies</h2>
         </div>
 
@@ -963,17 +1343,18 @@
             <div class="skill-tag scroll-reveal"><span>Adobe XD</span></div>
             <div class="skill-tag scroll-reveal"><span>Figma</span></div>
             <div class="skill-tag scroll-reveal"><span>API Development</span></div>
-            <div class="skill-tag scroll-reveal"><span>TypeScript</span></div>
-            <div class="skill-tag scroll-reveal"><span>Next.js</span></div>
             <div class="skill-tag scroll-reveal"><span>Express.js</span></div>
             <div class="skill-tag scroll-reveal"><span>REST APIs</span></div>
-            <div class="skill-tag scroll-reveal"><span>Webpack</span></div>
+            <div class="skill-tag scroll-reveal"><span>Problem Solving</span></div>
+            <div class="skill-tag scroll-reveal"><span>Data Structures</span></div>
+            <div class="skill-tag scroll-reveal"><span>Algorithms</span></div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="container">
         <div class="section-header">
+            <span class="section-subtitle">// get in touch</span>
             <h2 class="section-title scroll-reveal">Contact Me</h2>
         </div>
 
@@ -990,10 +1371,10 @@
                 <a href="mailto:md.mahfuzurm4@gmail.com" class="contact-btn">
                     ✉️ Email
                 </a>
-                <a href="https://github.com/MohammadMahfuzurRahman" target="_blank" class="contact-btn">
+                <a href="https://github.com/mohammadmahfuzurrahman" target="_blank" rel="noopener noreferrer" class="contact-btn">
                     💻 GitHub
                 </a>
-                <a href="https://linkedin.com" target="_blank" class="contact-btn">
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-btn">
                     💼 LinkedIn
                 </a>
             </div>
@@ -1007,6 +1388,17 @@
             <p>Building the future, one line of code at a time.</p>
         </div>
     </footer>
+
+    <style>
+        @keyframes scanning {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
 
     <script>
         // Smooth scroll with offset for fixed navbar
@@ -1047,7 +1439,7 @@
             observer.observe(el);
         });
 
-        // Animate skill tags on hover with stagger
+        // Add stagger delay to skill tags
         document.querySelectorAll('.skill-tag').forEach((tag, index) => {
             tag.style.animationDelay = `${index * 0.05}s`;
         });
@@ -1086,7 +1478,6 @@
             });
         });
 
-
         // Add stagger delay to info boxes
         document.querySelectorAll('.info-box').forEach((box, index) => {
             box.style.animationDelay = `${index * 0.1}s`;
@@ -1094,6 +1485,11 @@
 
         // Add stagger delay to timeline items
         document.querySelectorAll('.timeline-item').forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.15}s`;
+        });
+
+        // Add stagger delay to experience items
+        document.querySelectorAll('.experience-item').forEach((item, index) => {
             item.style.animationDelay = `${index * 0.15}s`;
         });
     </script>
